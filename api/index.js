@@ -7,7 +7,6 @@ const instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}`
-    // Authorization: 'hello'
   }
 })
 
