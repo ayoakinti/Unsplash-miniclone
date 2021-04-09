@@ -103,6 +103,7 @@ header {
 .search-progress-bar {
   position: absolute;
   top: 0;
+  padding: 10px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -110,6 +111,7 @@ header {
   background-color: $headerColor;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   color: $info;
   font-size: 28px;
   div {
@@ -119,6 +121,12 @@ header {
     margin-left: 8px;
     text-transform: capitalize;
     color: #597396;
+  }
+}
+
+@media (max-width: 568px) {
+  .search-progress-bar {
+    font-size: 20px;
   }
 }
 
@@ -205,7 +213,7 @@ header {
   height: 100%;
   width: 100%;
   z-index: 20;
-  background-color: rgba(0, 0, 0, 0.6);
+  // background-color: rgba(0, 0, 0, 0.6);
   .card {
     overflow: hidden;
     background-color: #ccc;
@@ -269,7 +277,7 @@ header {
   left: 0;
   z-index: 11;
   display: none;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   width: 100%;
   height: 100%;
   justify-content: center;

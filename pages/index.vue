@@ -8,7 +8,7 @@
     />
     <Loader v-if="isLoading" />
     <div v-if="photos.length <= 0">
-      <ErrorPage />
+      <ErrorPage @refresh-page="refreshPage" />
     </div>
     <div v-else class="main-wrapper">
       <div class="row">
@@ -41,15 +41,29 @@ export default {
       return this.$store.state.photos
     }
   },
-  async created () {
-    await this.$store.dispatch('getPhotos', {
-      query: 'African',
-      order_by: 'latest',
-      per_page: 8
-    })
-    this.isLoading = false
+  created () {
+    this.initializePage()
   },
   methods: {
+    async initializePage () {
+      try {
+        await this.$store.dispatch('getPhotos', {
+          query: 'African',
+          order_by: 'latest',
+          per_page: 8
+        })
+      } catch (error) {
+        console.log(error.response.data)
+      }
+
+      this.isLoading = false
+    },
+    refreshPage () {
+      this.$store.dispatch('toggleSearchProgressBar', {
+        reset: true
+      })
+      this.initializePage()
+    },
     openImageModal (photo) {
       this.imageModal = true
       this.imageInView = photo

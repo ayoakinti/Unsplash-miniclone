@@ -46,9 +46,14 @@ export default {
     async searchPhotos () {
       this.isLoading = true
       this.$emit('search-started', this.searchIndex)
-      await this.$store.dispatch('getPhotos', {
-        query: this.searchIndex
-      })
+
+      try {
+        await this.$store.dispatch('getPhotos', {
+          query: this.searchIndex
+        })
+      } catch (error) {
+        console.log(error.response.data)
+      }
       this.isLoading = false
       this.$emit('search-stopped')
       this.searchIndex = ''

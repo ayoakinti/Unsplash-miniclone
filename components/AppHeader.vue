@@ -19,11 +19,31 @@
 
 <script>
 export default {
+  props: {
+    resetSearchBar: {
+      type: Boolean,
+      required: true
+    }
+  },
   data () {
     return {
       searchStart: false,
       searchStop: false,
       searchIndex: ''
+    }
+  },
+  watch: {
+    resetSearchBar: {
+      immediate: true,
+      handler () {
+        if (this.resetSearchBar) {
+          this.searchStart = false
+          this.$store.dispatch('toggleSearchProgressBar', {
+            reset: false
+          })
+        }
+      }
+
     }
   },
   methods: {

@@ -1,17 +1,26 @@
 <template>
-  <div class="search-progress-bar" @click="closeSearchProgressBar">
-    <div v-if="!searchStop">
-      Searching
+  <div class="search-progress-bar">
+    <div class="d-flex align-items-center">
+      <div v-if="!searchStop">
+        Searching
+      </div>
+      <div v-else>
+        Search Results
+      </div>
+      for <span>"{{ searchIndex }}"</span>
     </div>
-    <div v-else>
-      Search Results
+    <div class="d-flex align-items-center cursor-pointer" @click="closeSearchProgressBar">
+      <IconClose />
     </div>
-    for <span>"{{ searchIndex }}"</span>
   </div>
 </template>
 
 <script>
+import IconClose from './Icons/IconClose'
 export default {
+  components: {
+    IconClose
+  },
   props: {
     searchIndex: {
       type: String,
@@ -29,3 +38,9 @@ export default {
   }
 }
 </script>
+
+<style>
+  .search-progress-bar svg path {
+    fill: #1a4986;
+  }
+</style>

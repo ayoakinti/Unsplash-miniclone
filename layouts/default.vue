@@ -1,12 +1,20 @@
 <template>
   <div class="page-wrapper">
-    <AppHeader />
+    <AppHeader
+      :reset-search-bar="resetSearchBar"
+    />
     <Nuxt />
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  computed: {
+    resetSearchBar () {
+      return this.$store.state.resetSearchBar
+    }
+  }
+}
 </script>
 
 <style lang="scss"></style>>

@@ -1,3 +1,4 @@
 export default () => ({
-  photos: []
+  photos: [],
+  resetSearchBar: false
 })

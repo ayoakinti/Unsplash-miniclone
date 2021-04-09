@@ -31,14 +31,9 @@ export default {
     }
   },
   methods: {
-    async refreshPage () {
+    refreshPage () {
       this.isLoading = true
-      await this.$store.dispatch('getPhotos', {
-        query: 'African',
-        order_by: 'latest',
-        per_page: 8
-      })
-      this.isLoading = false
+      this.$emit('refresh-page')
     }
   }
 }
