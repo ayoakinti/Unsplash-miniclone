@@ -120,7 +120,7 @@ header {
     text-transform: capitalize;
     color: #597396;
   }
-} 
+}
 
 .main-wrapper {
   position: absolute;
@@ -313,7 +313,7 @@ figure#modal-photo {
   display: flex;
   flex-direction: column;
   .image-container {
-    max-height: 700px;
+    max-height: 70vh;
     overflow: auto;
     line-height: 0;
     img {
@@ -344,6 +344,15 @@ figure#modal-photo {
   justify-content: space-between;
   img {
     max-width: 100%;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $info;
+  &:hover {
+    text-decoration: underline;
+    color: #ccc;
   }
 }
 
