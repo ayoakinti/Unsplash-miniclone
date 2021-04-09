@@ -308,9 +308,15 @@ header {
     .modal-close-icon {
       position: absolute;
       top: -20px;
-      right: 0;
+      right: -60px;
       cursor: pointer;
     }
+  }
+}
+
+@media (max-width: 1232px) {
+  .modal-close-icon {
+   right: 0 !important;
   }
 }
 
