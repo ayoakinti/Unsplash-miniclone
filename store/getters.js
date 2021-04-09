@@ -1,3 +1,3 @@
 export default {
-  mountains: state => state.mountains
+  photos: state => state.photos
 }

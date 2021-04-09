@@ -15,7 +15,7 @@ $black: #000000;
 $success: #27ae60;
 $warning: #ff5c00;
 $danger: #eb5757;
-$info: #2f80ed;
+$info: #1a4986;
 
 body {
   font-size: 16px;
@@ -39,13 +39,21 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .form-group {
   position: relative;
+  .form-icon {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    left: 10px;
+  }
   .form-control {
-    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
-    padding: 20px 15px;
+    padding: 20px 50px;
     color: $text;
     font-size: 16px;
     display: block;
@@ -55,11 +63,11 @@ header {
     border-radius: 10px;
     border: none;
     transition: background-color 0.2s ease-in;
-  }
-  .form-control:focus {
-    border: 1px solid #ccc;
-    background-color: $white;
-    transition: background-color 0.2s ease-in;
+    &:focus {
+      border: 1px solid #ccc;
+      background-color: $white;
+      transition: background-color 0.2s ease-in;
+    }
   }
   .search-options {
     background-color: $white;
@@ -70,6 +78,9 @@ header {
     z-index: 2;
     border: 1px solid #ccc;
     padding: 10px;
+    &.show {
+      display: block;
+    }
     ul {
       padding-left: 0;
       li {
@@ -80,17 +91,36 @@ header {
           display: block;
           padding: 5px;
           color: $secondary;
-        }
-        &:hover {
-          background: #ccc;
+          &:hover {
+            background: #ccc;
+          }
         }
       }
     }
   }
-  .search-options.show {
-    display: block;
-  }
 }
+
+.search-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: $headerColor;
+  display: flex;
+  align-items: center;
+  color: $info;
+  font-size: 28px;
+  div {
+    margin-right: 8px;
+  }
+  span {
+    margin-left: 8px;
+    text-transform: capitalize;
+    color: #597396;
+  }
+} 
 
 .main-wrapper {
   position: absolute;
@@ -102,19 +132,14 @@ header {
   background: transparent;
 }
 
-.container-fluid {
-  padding: 20px;
-  min-height: calc(100vh - 70px);
-}
-
-#photos {
+.grid {
   line-height: 0;
   -webkit-column-count: 3;
   -moz-column-count: 3;
   column-count: 3;
   grid-column-gap: 40px;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  figure {
+  figure#grid-photo {
     // width: 100% !important;
     height: auto !important;
     position: relative;
@@ -122,7 +147,7 @@ header {
     border-radius: 10px;
     overflow: hidden;
     &:hover {
-      cursor: pointer;
+      cursor: zoom-in;
     }
     img {
       width: 100%;
@@ -139,10 +164,10 @@ header {
       top: 0px;
       left: 0px;
       background: rgba(0, 0, 0, 0.4);
-    }
-    .overlay.show {
-      visibility: visible;
-      transition: visibility 0.2s ease-in;
+      &.show {
+        visibility: visible;
+        transition: visibility 0.2s ease-in;
+      }
     }
     figcaption {
       z-index: 1;
@@ -151,50 +176,62 @@ header {
       display: none;
       padding: 10px;
       color: #ccc;
-    }
-    figcaption.show {
-      display: block;
+      &.show {
+        display: block;
+      }
     }
   }
 }
 
 @media (max-width: 992px) {
-  #photos {
+  .grid {
     -moz-column-count: 2;
     -webkit-column-count: 2;
     column-count: 2;
   }
 }
 @media (max-width: 767px) {
-  #photos {
+  .grid {
     -moz-column-count: 1;
     -webkit-column-count: 1;
     column-count: 1;
   }
 }
 
-.card {
-  width: 300px;
-  float: left;
-  border: 1px solid #ddd;
-  margin-right: 10px;
-  .image {
-    background: #e9ebee;
-    height: 175px;
-  }
-  .bars {
-    height: 85px;
-    .bar {
-      background: #e9ebee;
-      margin: 0 13px 13px;
-      height: 19px;
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 20;
+  background-color: rgba(0, 0, 0, 0.6);
+  .card {
+    overflow: hidden;
+    background-color: #ccc;
+    height: 300px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    &.cardA {
+      height: 350px !important;
     }
-    .bar1 {
-      width: 80%;
-      margin-top: 17px;
+    .image {
+      height: 70%;
     }
-    .bar2 {
-      width: 30%;
+    .bars {
+      height: 30%;
+      .bar {
+        background: #e9ebee;
+        margin: 0 13px 13px;
+        height: 19px;
+      }
+      .bar1 {
+        width: 50%;
+        margin-top: 17px;
+      }
+      .bar2 {
+        width: 30%;
+      }
     }
   }
 }
@@ -227,47 +264,86 @@ header {
 
 .modal {
   position: fixed;
-  overflow-y: auto;
+  overflow: auto;
   top: 0;
   left: 0;
-  z-index: 5000;
+  z-index: 11;
   display: none;
+  background: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
-  /* overflow: hidden; */
-  outline: 0;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 
   &.show {
-    display: block;
-  }
-
-  .modal-dialog-centered {
     display: flex;
-    align-items: center;
-    min-height: calc(100% - 1rem);
   }
 
-  .modal-dialog {
-    position: relative;
-    width: auto;
-    margin: 0.5rem;
-    pointer-events: none;
-    max-width: 500px;
-    margin: 1.75rem auto;
-
-    .modal-content {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      max-height: 70vh;
-      overflow-y: auto;
-      pointer-events: auto;
-      background-color: #fff;
-      background-clip: padding-box;
-      border-radius: 5px;
-      outline: 0;
+  .modal-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    &:hover {
+      cursor: zoom-out;
     }
+  }
+
+  .modal-content {
+    max-width: 1000px;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    .modal-close-icon {
+      position: absolute;
+      top: -20px;
+      right: 0;
+      cursor: pointer;
+    }
+  }
+}
+
+figure#modal-photo {
+  border-radius: 10px;
+  margin-top: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  .image-container {
+    max-height: 700px;
+    overflow: auto;
+    line-height: 0;
+    img {
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  figcaption {
+    height: 100px;
+    background-color: $white;
+    padding: 15px 30px;
+    color: $secondary;
+    h3 {
+      font-weight: 400;
+      font-size: 23px;
+    }
+    p {
+      color: #ccc;
+    }
+  }
+}
+
+.error-image {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  img {
+    max-width: 100%;
   }
 }
 

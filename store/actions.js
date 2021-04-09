@@ -1,9 +1,11 @@
 import api from '@/api'
 
 export default {
-  async getMountains ({ commit }) {
-    const res = await api.get('/photos')
+  async getPhotos ({ commit }, params) {
+    const res = await api.get('/search/photos', {
+      params
+    })
     console.log(res.data, 'photos')
-    commit('SET_MOUNTAINS', res.data)
+    commit('SET_PHOTOS', res.data)
   }
 }

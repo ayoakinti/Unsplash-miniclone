@@ -1,5 +1,5 @@
 export default {
-  SET_MOUNTAINS (state, payload) {
-    state.mountains = payload
+  SET_PHOTOS (state, payload) {
+    state.photos = payload.results
   }
 }

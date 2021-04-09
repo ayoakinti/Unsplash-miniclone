@@ -1,18 +1,37 @@
 <template>
-  <div
-    class="modal show"
-    style="background: rgba(0,0,0,0.5)"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div id="modal" class="modal-content">
-        Hello
+  <div :class="[{ show: imageModal }, 'modal']">
+    <div class="modal-mask" @click="closeImageModal" />
+
+    <div id="modal" class="modal-content">
+      <ModalPhotoFigure :key="photo.id" :photo="photo" />
+
+      <div class="modal-close-icon" @click="closeImageModal">
+        <IconClose />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import IconClose from './Icons/IconClose'
 export default {
-
+  components: {
+    IconClose
+  },
+  props: {
+    imageModal: {
+      type: Boolean,
+      required: true
+    },
+    photo: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    closeImageModal () {
+      this.$emit('close-image-modal')
+    }
+  }
 }
 </script>
