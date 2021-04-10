@@ -10,7 +10,7 @@
           v-if="searchStart"
           :search-index="searchIndex"
           :search-stop="searchStop"
-          @close-search-progress-bar="searchStart = false"
+          @close-search-progress-bar="resetSearchConditions"
         />
       </div>
     </div>
@@ -50,6 +50,10 @@ export default {
     showSearchProgressBar (searchIndex) {
       this.searchStart = true
       this.searchIndex = searchIndex
+    },
+    resetSearchConditions () {
+      this.searchStart = false
+      this.searchStop = false
     }
   }
 }
