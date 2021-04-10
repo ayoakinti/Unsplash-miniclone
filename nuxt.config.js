@@ -7,7 +7,8 @@ export default {
   },
 
   env: {
-    UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY
+    UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY,
+    BASE_URL: process.env.BASE_URL
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head

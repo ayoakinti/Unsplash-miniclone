@@ -1,3 +1,3 @@
 export default {
-  baseURL: 'https://api.unsplash.com'
+  baseURL: process.env.BASE_URL
 }
