@@ -1,8 +1,6 @@
 import axios from 'axios'
 import config from '../config'
 
-console.log(process.env.UNSPLASH_ACCESS_KEY)
-
 const instance = axios.create({
   baseURL: config.baseURL,
   headers: {
