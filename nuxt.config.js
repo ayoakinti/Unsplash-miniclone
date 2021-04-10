@@ -1,11 +1,13 @@
-require('dotenv').config()
-
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
   target: 'static',
   generate: {
     fallback: true
+  },
+
+  env: {
+    UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -46,8 +48,7 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-    '@nuxtjs/dotenv'
+    '@nuxtjs/axios'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
